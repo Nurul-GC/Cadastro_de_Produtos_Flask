@@ -7,7 +7,10 @@ from Main import db
 @app.route('/index/')
 @app.route('/')
 def index():
-    return render_template('index.html')
+    produtos = Produtos
+    tamanho = len(produtos.query.filter_by().all())
+    print(tamanho)
+    return render_template('index.html',  produtos=produtos, tam=tamanho)
 
 
 @app.route('/cadastrar/', methods=['GET', 'POST'])

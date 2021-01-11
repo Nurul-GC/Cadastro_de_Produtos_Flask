@@ -10,14 +10,12 @@
   td {
       text-align: center;
   }
-</style>
 
-<div style="margin-left: 500px" class="container col-md-8">
-  <a href="{{ url_for('cadastrar') }}"><button type="button" class="btn btn-primary">Cadastrar</button></a>
-  <button type="button" class="btn btn-secondary">Listar</button>
-  <button type="button" class="btn btn-success">Editar</button>
-  <button type="button" class="btn btn-danger">Apagar</button>
-</div>
+  #btnEdit{
+    margin-left: 50px;
+    background-color: orange;
+  }
+</style>
 
 <div style="margin-top: 30px" class="container col-md-8">
     <table class="table table-striped">
@@ -29,19 +27,30 @@
           <th scope="col">estoque mínimo</th>
           <th scope="col">saldo no estoque</th>
           <th scope="col">observação</th>
+          <th scope="col">funções</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Arroz</td>
-          <td>20.00</td>
-          <td>30</td>
-          <td>4</td>
-          <td>Não está vencido</td>
-        </tr>
+        {% for i in range(1, tam + 1) %}
+          <tr>
+            <td scope="row">{{ produtos.query.filter_by().get(i).id }}</td>
+            <td>{{ produtos.query.filter_by().get(i).nome }}</td>
+            <td>R$ {{ produtos.query.filter_by().get(i).preco }},00</td>
+            <td>{{ produtos.query.filter_by().get(i).estoque_minimo }}</td>
+            <td>{{ produtos.query.filter_by().get(i).saldo_estoque }}</td>
+            <td>{{ produtos.query.filter_by().get(i).observacao }}</td>
+            <td>
+              <button id="btnEdit" type="button" class="btn btn-success">Editar</button>
+              <button id="btnDel" type="button" class="btn btn-danger">Excluir</button>
+            </td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
+</div>
+
+<div class="container col-md-8">
+  <a href="{{ url_for('cadastrar') }}"><button style="background-color: blue;" type="button" class="btn col-md-12 btn-primary">Cadastrar</button></a>
 </div>
 
 {% endblock %}
