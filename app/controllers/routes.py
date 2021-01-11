@@ -1,5 +1,5 @@
 from Main import app
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from models.produtos import Produtos
 from Main import db
 
@@ -10,6 +10,7 @@ def index():
     produtos = Produtos
     tamanho = len(produtos.query.filter_by().all())
     print(tamanho)
+
     return render_template('index.html',  produtos=produtos, tam=tamanho)
 
 
@@ -29,3 +30,11 @@ def cadastrar():
             db.session.commit()
 
     return render_template('cadastrar.html')
+
+
+@app.route('/deletar/<id>')
+def deletar(id):
+    a = Produtos.query.filter_by().get(id)
+    db.session.delete(a)
+    db.session.commit()
+    return redirect(url_for('index'))

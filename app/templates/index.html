@@ -5,7 +5,6 @@
 </title>
 
 {% block content %}
-
 <style>
   td {
       text-align: center;
@@ -14,6 +13,11 @@
   #btnEdit{
     margin-left: 50px;
     background-color: orange;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+    cursor: none;
   }
 </style>
 
@@ -41,7 +45,11 @@
             <td>{{ produtos.query.filter_by().get(i).observacao }}</td>
             <td>
               <button id="btnEdit" type="button" class="btn btn-success">Editar</button>
-              <button id="btnDel" type="button" class="btn btn-danger">Excluir</button>
+              <a href="deletar/{{ produtos.query.filter_by().get(i).id}}">
+                <button id="btnDel" type="button" class="btn btn-danger">
+                          Excluir
+                </button>
+              </a>
             </td>
           </tr>
         {% endfor %}
