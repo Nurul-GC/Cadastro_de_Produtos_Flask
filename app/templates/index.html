@@ -1,20 +1,34 @@
 {% extends "base.html" %}
 
-
 <title>
     {% block title %} Cadastro de Produtos {% endblock %}
 </title>
 
 {% block content %}
 
-<div class="container col-md-8">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
+<style>
+  td {
+      text-align: center;
+  }
+</style>
+
+<div style="margin-left: 500px" class="container col-md-8">
+  <a href="{{ url_for('cadastrar') }}"><button type="button" class="btn btn-primary">Cadastrar</button></a>
+  <button type="button" class="btn btn-secondary">Listar</button>
+  <button type="button" class="btn btn-success">Editar</button>
+  <button type="button" class="btn btn-danger">Apagar</button>
+</div>
+
+<div style="margin-top: 30px" class="container col-md-8">
+    <table class="table table-striped">
+      <thead style="background-color: blue; color: white; text-align: center">
+        <tr">
           <th scope="col">código</th>
           <th scope="col">nome</th>
           <th scope="col">preço</th>
-          <th scope="col">quantidade</th>
+          <th scope="col">estoque mínimo</th>
+          <th scope="col">saldo no estoque</th>
+          <th scope="col">observação</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +37,8 @@
           <td>Arroz</td>
           <td>20.00</td>
           <td>30</td>
+          <td>4</td>
+          <td>Não está vencido</td>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+<title>
+    {% block title %} Cadastrar Produto {% endblock %}
+</title>
+
+{% block content %}
+    <div class="container col-md-5">
+        <form action="/cadastrar/" method="POST">
+          <div class="mb-3">
+            <label class="form-label">Nome do Produto</label>
+            <input name="nome" type="text" class="form-control" id="nome" required>
+          </div>
+
+          <div class="mb-3">
+            <label  class="form-label">Preço do produto</label>
+            <input name="preco" type="text" class="form-control" id="preco"  required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" >Estoque mínimo</label>
+            <input name="estoqueMin" type="text" class="form-control" id="estoqueMin" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" >Saldo no estoque</label>
+            <input name="saldoEstoque" type="text" class="form-control" id="saldoEstoque" required>
+          </div>
+
+           <div class="mb-3">
+            <label class="form-label" >Observação</label>
+            <input name="obs" type="text" class="form-control" id="obs">
+          </div>
+
+          <button type="submit" class="btn col-md-12 btn-primary">Cadastrar</button>
+
+        </form>
+    </div>
+{% endblock %}

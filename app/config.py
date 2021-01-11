@@ -1,2 +1,2 @@
-SQLALCHEMY_DATABASE_URI = 'sqlite:///cadastroProdutos.db'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///cadastroProduto.db'
 DEBUG = True
