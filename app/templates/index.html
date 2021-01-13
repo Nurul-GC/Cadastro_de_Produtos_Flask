@@ -44,7 +44,12 @@
             <td>{{ produtos.query.filter_by().get(i).saldo_estoque }}</td>
             <td>{{ produtos.query.filter_by().get(i).observacao }}</td>
             <td>
-              <button id="btnEdit" type="button" class="btn btn-success">Editar</button>
+              <a href="atualizar/{{ produtos.query.filter_by().get(i).id}}">
+                <button id="btnEdit" type="button" class="btn btn-success">
+                  Editar
+                </button>
+              </a>
+
               <a href="deletar/{{ produtos.query.filter_by().get(i).id}}">
                 <button id="btnDel" type="button" class="btn btn-danger">
                           Excluir

@@ -38,3 +38,32 @@ def deletar(id):
     db.session.delete(a)
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route('/atualizar/<id>')
+def update(id):
+    dados = Produtos.query.filter_by().get(id)
+
+    return render_template('atualizar.html', id=id, dados=dados)
+
+
+@app.route('/atualizaDados/<id>', methods=['POST'])
+def updates(id):
+    nome = request.form['nome']
+    preco = request.form['preco']
+    estoqueMin = request.form['estoqueMin']
+    saldoEstoque = request.form['saldoEstoque']
+    observacao = request.form['obs']
+
+    dados = Produtos.query.filter_by().get(id)
+
+    dados.nome = nome
+    dados.preco = preco
+    dados.estoque_minimo = estoqueMin
+    dados.saldo_estoque = saldoEstoque
+    dados.observacao = observacao
+
+    db.session.add(dados)
+    db.session.commit()
+
+    return redirect(url_for('index'))
