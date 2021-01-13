@@ -1,2 +1,3 @@
 SQLALCHEMY_DATABASE_URI = 'sqlite:///cadastroProduto.db'
 DEBUG = True
+SQLALCHEMY_TRACK_MODIFICATIONS = True

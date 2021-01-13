@@ -9,7 +9,6 @@ from Main import db
 def index():
     produtos = Produtos
     tamanho = len(produtos.query.filter_by().all())
-    print(tamanho)
 
     return render_template('index.html',  produtos=produtos, tam=tamanho)
 
