@@ -7,10 +7,9 @@ from Main import db
 @app.route('/index/')
 @app.route('/')
 def index():
-    produtos = Produtos
-    tamanho = len(produtos.query.filter_by().all())
+    produtos = Produtos.query.all()
 
-    return render_template('index.html',  produtos=produtos, tam=tamanho)
+    return render_template('index.html', produto=produtos)
 
 
 @app.route('/cadastrar/', methods=['GET', 'POST'])
@@ -27,7 +26,8 @@ def cadastrar():
             inserir = produtos(nome, preco, estoqueMin, saldoEstoque,  obs)
             db.session.add(inserir)
             db.session.commit()
-
+    else:
+        return render_template('cadastrar.html')
     return render_template('cadastrar.html')
 
 
@@ -36,6 +36,7 @@ def deletar(id):
     a = Produtos.query.filter_by().get(id)
     db.session.delete(a)
     db.session.commit()
+
     return redirect(url_for('index'))
 
 

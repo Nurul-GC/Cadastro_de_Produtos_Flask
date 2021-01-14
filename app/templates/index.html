@@ -17,14 +17,19 @@
   a{
     text-decoration: none;
     color: white;
-    cursor: none;
+
   }
 </style>
 
+<div class="container col-md-8">
+  <a href="{{ url_for('cadastrar') }}"><button style="background-color: green;" type="button" class="btn col-md-12 btn-primary">Cadastrar</button></a>
+</div>
+
 <div style="margin-top: 30px" class="container col-md-8">
+
     <table class="table table-striped">
       <thead style="background-color: blue; color: white; text-align: center">
-        <tr">
+        <tr>
           <th scope="col">código</th>
           <th scope="col">nome</th>
           <th scope="col">preço</th>
@@ -35,35 +40,35 @@
         </tr>
       </thead>
       <tbody>
-        {% for i in range(1, tam + 1) %}
-          <tr>
-            <td scope="row">{{ produtos.query.filter_by().get(i).id }}</td>
-            <td>{{ produtos.query.filter_by().get(i).nome }}</td>
-            <td>R$ {{ produtos.query.filter_by().get(i).preco }},00</td>
-            <td>{{ produtos.query.filter_by().get(i).estoque_minimo }}</td>
-            <td>{{ produtos.query.filter_by().get(i).saldo_estoque }}</td>
-            <td>{{ produtos.query.filter_by().get(i).observacao }}</td>
-            <td>
-              <a href="atualizar/{{ produtos.query.filter_by().get(i).id}}">
-                <button id="btnEdit" type="button" class="btn btn-success">
-                  Editar
-                </button>
-              </a>
+        {% for i in produto %}
+              <tr>
+                <td scope="row">{{ i.id }}</td>
+                <td>{{ i.nome }}</td>
+                <td class="col-md-1">R$ {{ i.preco }}</td>
+                <td>{{ i.estoque_minimo }}</td>
+                {% if i.saldo_estoque < i.estoque_minimo %}
+                    <td style="color: red;">{{ i.saldo_estoque }}</td>
+                {% else %}
+                    <td>{{ i.saldo_estoque }}
+                {% endif %}
+                <td>{{ i.observacao }}</td>
+                <td class="col-md-3">
+                  <a href="atualizar/{{ i.id}}">
+                    <button id="btnEdit" type="button" class="btn btn-success">
+                      Editar
+                    </button>
+                  </a>
+                  <a href="deletar/{{ i.id}}">
+                    <button id="btnDel" type="button" class="btn btn-danger">
+                              Excluir
+                    </button>
+                  </a>
+                </td>
+              </tr>
 
-              <a href="deletar/{{ produtos.query.filter_by().get(i).id}}">
-                <button id="btnDel" type="button" class="btn btn-danger">
-                          Excluir
-                </button>
-              </a>
-            </td>
-          </tr>
         {% endfor %}
       </tbody>
     </table>
-</div>
-
-<div class="container col-md-8">
-  <a href="{{ url_for('cadastrar') }}"><button style="background-color: blue;" type="button" class="btn col-md-12 btn-primary">Cadastrar</button></a>
 </div>
 
 {% endblock %}
