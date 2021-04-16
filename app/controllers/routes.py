@@ -1,7 +1,6 @@
-from Main import app
+from app.Main import app, db
 from flask import render_template, request, redirect, url_for
-from models.produtos import Produtos
-from Main import db
+from app.models.produtos import *
 
 
 @app.route('/index/')
@@ -23,7 +22,7 @@ def cadastrar():
         obs = request.form['obs']
 
         if produtos.query.filter_by(nome=nome).all() == []:
-            inserir = produtos(nome, preco, estoqueMin, saldoEstoque,  obs)
+            inserir = produtos(nome, preco, estoqueMin, saldoEstoque, obs)
             db.session.add(inserir)
             db.session.commit()
     else:
