@@ -1,4 +1,4 @@
-from app.Main import app, db
+from app.Main import *
 from flask import render_template, request, redirect, url_for
 from app.models.produtos import *
 
@@ -6,14 +6,14 @@ from app.models.produtos import *
 @app.route('/index/')
 @app.route('/')
 def index():
-    produtos = Produtos.query.all()
+    produtos_index = Produtos.query.all()
 
-    return render_template('index.html', produto=produtos)
+    return render_template('index.html', produto=produtos_index)
 
 
 @app.route('/cadastrar/', methods=['GET', 'POST'])
 def cadastrar():
-    produtos = Produtos
+    cadastrar_produtos = Produtos
     if request.method == 'POST':
         nome = request.form['nome']
         preco = request.form['preco']
@@ -21,8 +21,8 @@ def cadastrar():
         saldoEstoque = request.form['saldoEstoque']
         obs = request.form['obs']
 
-        if produtos.query.filter_by(nome=nome).all() == []:
-            inserir = produtos(nome, preco, estoqueMin, saldoEstoque, obs)
+        if not cadastrar_produtos.query.filter_by(nome=nome).all():
+            inserir = cadastrar_produtos(nome, preco, estoqueMin, saldoEstoque, obs)
             db.session.add(inserir)
             db.session.commit()
     else:
@@ -31,8 +31,8 @@ def cadastrar():
 
 
 @app.route('/deletar/<id>')
-def deletar(id):
-    a = Produtos.query.filter_by().get(id)
+def deletar(_id):
+    a = Produtos.query.filter_by().get(_id)
     db.session.delete(a)
     db.session.commit()
 
@@ -40,21 +40,21 @@ def deletar(id):
 
 
 @app.route('/atualizar/<id>')
-def update(id):
-    dados = Produtos.query.filter_by().get(id)
+def update(_id):
+    dados = Produtos.query.filter_by().get(_id)
 
-    return render_template('atualizar.html', id=id, dados=dados)
+    return render_template('atualizar.html', id=_id, dados=dados)
 
 
 @app.route('/atualizaDados/<id>', methods=['POST'])
-def updates(id):
+def updates(_id):
     nome = request.form['nome']
     preco = request.form['preco']
     estoqueMin = request.form['estoqueMin']
     saldoEstoque = request.form['saldoEstoque']
     observacao = request.form['obs']
 
-    dados = Produtos.query.filter_by().get(id)
+    dados = Produtos.query.filter_by().get(_id)
 
     dados.nome = nome
     dados.preco = preco
